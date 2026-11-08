@@ -1,0 +1,1016 @@
+[
+  {
+    "name": "lcs-both-empty",
+    "command": "lcs",
+    "input": {
+      "task": "lcs",
+      "a": "",
+      "b": ""
+    },
+    "expected": {
+      "length": 0,
+      "sequence": ""
+    },
+    "actual": {
+      "length": 0,
+      "sequence": ""
+    },
+    "status": "PASS",
+    "defect": "Failure to handle empty strings or returning null instead of empty sequence"
+  },
+  {
+    "name": "lcs-one-empty",
+    "command": "lcs",
+    "input": {
+      "task": "lcs",
+      "a": "algorithm",
+      "b": ""
+    },
+    "expected": {
+      "length": 0,
+      "sequence": ""
+    },
+    "actual": {
+      "length": 0,
+      "sequence": ""
+    },
+    "status": "PASS",
+    "defect": "Unchecked index bounds when one string has length 0"
+  },
+  {
+    "name": "lcs-interleaved-subsequence",
+    "command": "lcs",
+    "input": {
+      "task": "lcs",
+      "a": "XAYBZCD",
+      "b": "1A2B3C4D5"
+    },
+    "expected": {
+      "length": 4,
+      "sequence": "ABCD"
+    },
+    "actual": {
+      "length": 4,
+      "sequence": "ABCD"
+    },
+    "status": "PASS",
+    "defect": "Erroneously requiring contiguous characters (substring instead of subsequence)"
+  },
+  {
+    "name": "lcs-repeated-characters",
+    "command": "lcs",
+    "input": {
+      "task": "lcs",
+      "a": "AAAA",
+      "b": "AA"
+    },
+    "expected": {
+      "length": 2,
+      "sequence": "AA"
+    },
+    "actual": {
+      "length": 2,
+      "sequence": "AA"
+    },
+    "status": "PASS",
+    "defect": "Duplicate character overcounting or incorrect pointer decrement"
+  },
+  {
+    "name": "lcs-alternative-optimal",
+    "command": "lcs",
+    "input": {
+      "task": "lcs",
+      "a": "AB",
+      "b": "BA"
+    },
+    "expected": {
+      "length": 1,
+      "sequence": "A"
+    },
+    "actual": {
+      "length": 1,
+      "sequence": "A"
+    },
+    "status": "PASS",
+    "defect": "Tie-breaking mishandling in DP reconstruction leading to length/sequence mismatch"
+  },
+  {
+    "name": "merge-empty",
+    "command": "merge",
+    "input": {
+      "task": "merge",
+      "sizes": []
+    },
+    "expected": {
+      "cost": 0,
+      "plan": []
+    },
+    "actual": {
+      "cost": 0,
+      "plan": []
+    },
+    "status": "PASS",
+    "defect": "IndexError on empty array or nonzero cost for zero blocks"
+  },
+  {
+    "name": "merge-single-block",
+    "command": "merge",
+    "input": {
+      "task": "merge",
+      "sizes": [
+        42
+      ]
+    },
+    "expected": {
+      "cost": 0,
+      "plan": []
+    },
+    "actual": {
+      "cost": 0,
+      "plan": []
+    },
+    "status": "PASS",
+    "defect": "Emitting unnecessary merges or non-zero cost when no merges are needed"
+  },
+  {
+    "name": "merge-with-zeros",
+    "command": "merge",
+    "input": {
+      "task": "merge",
+      "sizes": [
+        0,
+        5,
+        0,
+        5
+      ]
+    },
+    "expected": {
+      "cost": 20,
+      "plan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ]
+    },
+    "actual": {
+      "cost": 20,
+      "plan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ]
+    },
+    "status": "PASS",
+    "defect": "Mishandling zero-sized blocks during interval cost summation"
+  },
+  {
+    "name": "merge-adjacent-vs-arbitrary",
+    "command": "merge",
+    "input": {
+      "task": "merge",
+      "sizes": [
+        10,
+        100,
+        10
+      ]
+    },
+    "expected": {
+      "cost": 230,
+      "plan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          2
+        ]
+      ]
+    },
+    "actual": {
+      "cost": 230,
+      "plan": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          0,
+          2
+        ]
+      ]
+    },
+    "status": "PASS",
+    "defect": "Greedily picking non-adjacent minimum blocks instead of adhering to adjacency"
+  },
+  {
+    "name": "merge-large-costs-64bit",
+    "command": "merge",
+    "input": {
+      "task": "merge",
+      "sizes": [
+        1000000000,
+        1000000000,
+        1000000000
+      ]
+    },
+    "expected": {
+      "cost": 5000000000,
+      "plan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          2
+        ]
+      ]
+    },
+    "actual": {
+      "cost": 5000000000,
+      "plan": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          0,
+          2
+        ]
+      ]
+    },
+    "status": "PASS",
+    "defect": "32-bit integer overflow when cumulative merge cost exceeds 2^31 - 1"
+  },
+  {
+    "name": "tree-empty",
+    "command": "tree",
+    "input": {
+      "task": "tree",
+      "n": 0,
+      "weights": [],
+      "edges": []
+    },
+    "expected": {
+      "weight": 0,
+      "selected": []
+    },
+    "actual": {
+      "weight": 0,
+      "selected": []
+    },
+    "status": "PASS",
+    "defect": "IndexError on empty tree initialization"
+  },
+  {
+    "name": "tree-single-negative",
+    "command": "tree",
+    "input": {
+      "task": "tree",
+      "n": 1,
+      "weights": [
+        -15
+      ],
+      "edges": []
+    },
+    "expected": {
+      "weight": 0,
+      "selected": []
+    },
+    "actual": {
+      "weight": 0,
+      "selected": []
+    },
+    "status": "PASS",
+    "defect": "Selecting negative vertex when empty set (weight 0) is permitted and superior"
+  },
+  {
+    "name": "tree-all-negative",
+    "command": "tree",
+    "input": {
+      "task": "tree",
+      "n": 3,
+      "weights": [
+        -5,
+        -10,
+        -2
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "expected": {
+      "weight": 0,
+      "selected": []
+    },
+    "actual": {
+      "weight": 0,
+      "selected": []
+    },
+    "status": "PASS",
+    "defect": "Selecting any vertex in all-negative tree instead of optimal empty set"
+  },
+  {
+    "name": "tree-deep-chain",
+    "command": "tree",
+    "input": {
+      "task": "tree",
+      "n": 6,
+      "weights": [
+        10,
+        1,
+        10,
+        1,
+        10,
+        1
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    },
+    "expected": {
+      "weight": 30,
+      "selected": [
+        0,
+        2,
+        4
+      ]
+    },
+    "actual": {
+      "weight": 30,
+      "selected": [
+        0,
+        2,
+        4
+      ]
+    },
+    "status": "PASS",
+    "defect": "Recursion limit exhaustion or picking adjacent vertices along chain"
+  },
+  {
+    "name": "tree-star-center-vs-leaves",
+    "command": "tree",
+    "input": {
+      "task": "tree",
+      "n": 5,
+      "weights": [
+        15,
+        5,
+        5,
+        5,
+        5
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    "expected": {
+      "weight": 20,
+      "selected": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "actual": {
+      "weight": 20,
+      "selected": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "status": "PASS",
+    "defect": "Greedily picking center node with highest individual weight over sum of leaves"
+  },
+  {
+    "name": "search-empty-pattern",
+    "command": "naive",
+    "input": {
+      "task": "naive",
+      "text": "hello",
+      "pattern": ""
+    },
+    "expected": {
+      "positions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "actual": {
+      "positions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "status": "PASS",
+    "defect": "Failing to return all n+1 boundary start positions for empty pattern"
+  },
+  {
+    "name": "search-pattern-longer",
+    "command": "kmp",
+    "input": {
+      "task": "kmp",
+      "text": "abc",
+      "pattern": "abcdef"
+    },
+    "expected": {
+      "positions": []
+    },
+    "actual": {
+      "positions": []
+    },
+    "status": "PASS",
+    "defect": "Index out of bounds or false positives when pattern length > text length"
+  },
+  {
+    "name": "search-overlapping",
+    "command": "kmp",
+    "input": {
+      "task": "kmp",
+      "text": "AAAA",
+      "pattern": "AA"
+    },
+    "expected": {
+      "positions": [
+        0,
+        1,
+        2
+      ]
+    },
+    "actual": {
+      "positions": [
+        0,
+        1,
+        2
+      ]
+    },
+    "status": "PASS",
+    "defect": "Skipping overlapping occurrences by advancing text index past match end"
+  },
+  {
+    "name": "search-case-and-punctuation",
+    "command": "naive",
+    "input": {
+      "task": "naive",
+      "text": "Test! test? Test!",
+      "pattern": "Test!"
+    },
+    "expected": {
+      "positions": [
+        0,
+        12
+      ]
+    },
+    "actual": {
+      "positions": [
+        0,
+        12
+      ]
+    },
+    "status": "PASS",
+    "defect": "Unintended case-folding or punctuation stripping violating ASCII exact match"
+  },
+  {
+    "name": "rk-hash-collision-verification",
+    "command": "rk",
+    "input": {
+      "task": "rk",
+      "text": "abdj",
+      "pattern": "ab"
+    },
+    "expected": {
+      "positions": [
+        0
+      ]
+    },
+    "actual": {
+      "positions": [
+        0
+      ]
+    },
+    "status": "PASS",
+    "defect": "Reporting candidate 'dj' as match because hash('ab') == hash('dj') == 75 mod 101"
+  },
+  {
+    "name": "rk-negative-modulo-normalization",
+    "command": "rk",
+    "input": {
+      "task": "rk",
+      "text": "zabcdef",
+      "pattern": "bcd"
+    },
+    "expected": {
+      "positions": [
+        2
+      ]
+    },
+    "actual": {
+      "positions": [
+        2
+      ]
+    },
+    "status": "PASS",
+    "defect": "Un-normalized negative remainders causing hash lookup mismatch during sliding roll"
+  },
+  {
+    "name": "suffix-empty",
+    "command": "suffix",
+    "input": {
+      "task": "suffix",
+      "text": ""
+    },
+    "expected": {
+      "sa": [],
+      "lcp": [],
+      "repeated": ""
+    },
+    "actual": {
+      "sa": [],
+      "lcp": [],
+      "repeated": ""
+    },
+    "status": "PASS",
+    "defect": "Crash on empty text or returning [0] instead of empty array"
+  },
+  {
+    "name": "suffix-single-char",
+    "command": "suffix",
+    "input": {
+      "task": "suffix",
+      "text": "x"
+    },
+    "expected": {
+      "sa": [
+        0
+      ],
+      "lcp": [
+        0
+      ],
+      "repeated": ""
+    },
+    "actual": {
+      "sa": [
+        0
+      ],
+      "lcp": [
+        0
+      ],
+      "repeated": ""
+    },
+    "status": "PASS",
+    "defect": "Crash on single character or identifying single character as repeated"
+  },
+  {
+    "name": "suffix-all-identical",
+    "command": "suffix",
+    "input": {
+      "task": "suffix",
+      "text": "aaaa"
+    },
+    "expected": {
+      "sa": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "lcp": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "repeated": "aaa"
+    },
+    "actual": {
+      "sa": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "lcp": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "repeated": "aaa"
+    },
+    "status": "PASS",
+    "defect": "Incorrect suffix ordering or failing to detect overlapping maximal repeat"
+  },
+  {
+    "name": "suffix-all-distinct",
+    "command": "suffix",
+    "input": {
+      "task": "suffix",
+      "text": "abcdef"
+    },
+    "expected": {
+      "sa": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "lcp": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "repeated": ""
+    },
+    "actual": {
+      "sa": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "lcp": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "repeated": ""
+    },
+    "status": "PASS",
+    "defect": "False non-empty repeated string when no character repeats"
+  },
+  {
+    "name": "suffix-tie-longest-repeats",
+    "command": "suffix",
+    "input": {
+      "task": "suffix",
+      "text": "xyz_xyz_abc_abc"
+    },
+    "expected": {
+      "sa": [
+        11,
+        7,
+        3,
+        12,
+        8,
+        13,
+        9,
+        14,
+        10,
+        4,
+        0,
+        5,
+        1,
+        6,
+        2
+      ],
+      "lcp": [
+        0,
+        4,
+        1,
+        0,
+        3,
+        0,
+        2,
+        0,
+        1,
+        0,
+        4,
+        0,
+        3,
+        0,
+        2
+      ],
+      "repeated": "_abc"
+    },
+    "actual": {
+      "sa": [
+        11,
+        7,
+        3,
+        12,
+        8,
+        13,
+        9,
+        14,
+        10,
+        4,
+        0,
+        5,
+        1,
+        6,
+        2
+      ],
+      "lcp": [
+        0,
+        4,
+        1,
+        0,
+        3,
+        0,
+        2,
+        0,
+        1,
+        0,
+        4,
+        0,
+        3,
+        0,
+        2
+      ],
+      "repeated": "_abc"
+    },
+    "status": "PASS",
+    "defect": "Failure to accurately compute SA/LCP or select maximal length repeat when multiple repeats exist"
+  },
+  {
+    "name": "aho-empty-dictionary",
+    "command": "aho",
+    "input": {
+      "task": "aho",
+      "patterns": [],
+      "texts": [
+        "sample",
+        "text"
+      ]
+    },
+    "expected": {
+      "counts": [
+        [],
+        []
+      ]
+    },
+    "actual": {
+      "counts": [
+        [],
+        []
+      ]
+    },
+    "status": "PASS",
+    "defect": "Crash on empty dictionary or non-empty count row"
+  },
+  {
+    "name": "aho-empty-texts",
+    "command": "aho",
+    "input": {
+      "task": "aho",
+      "patterns": [
+        "pattern"
+      ],
+      "texts": []
+    },
+    "expected": {
+      "counts": []
+    },
+    "actual": {
+      "counts": []
+    },
+    "status": "PASS",
+    "defect": "Crash on empty texts array or returning non-empty list"
+  },
+  {
+    "name": "aho-empty-text-string",
+    "command": "aho",
+    "input": {
+      "task": "aho",
+      "patterns": [
+        "alpha",
+        "beta"
+      ],
+      "texts": [
+        "",
+        "alpha"
+      ]
+    },
+    "expected": {
+      "counts": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "actual": {
+      "counts": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "status": "PASS",
+    "defect": "Failure to output zero count row for empty text string"
+  },
+  {
+    "name": "aho-duplicate-patterns",
+    "command": "aho",
+    "input": {
+      "task": "aho",
+      "patterns": [
+        "test",
+        "test"
+      ],
+      "texts": [
+        "test test"
+      ]
+    },
+    "expected": {
+      "counts": [
+        [
+          2,
+          2
+        ]
+      ]
+    },
+    "actual": {
+      "counts": [
+        [
+          2,
+          2
+        ]
+      ]
+    },
+    "status": "PASS",
+    "defect": "Overwriting duplicate pattern entries instead of giving each its full count"
+  },
+  {
+    "name": "aho-nested-suffix-patterns",
+    "command": "aho",
+    "input": {
+      "task": "aho",
+      "patterns": [
+        "she",
+        "he",
+        "hers"
+      ],
+      "texts": [
+        "ushers"
+      ]
+    },
+    "expected": {
+      "counts": [
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    "actual": {
+      "counts": [
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    "status": "PASS",
+    "defect": "Missing suffix match ('he' inside 'she') when failure links are not propagated"
+  },
+  {
+    "name": "aho-repeated-texts-state-reset",
+    "command": "aho",
+    "input": {
+      "task": "aho",
+      "patterns": [
+        "cat"
+      ],
+      "texts": [
+        "cat",
+        "cat",
+        "dog"
+      ]
+    },
+    "expected": {
+      "counts": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ]
+    },
+    "actual": {
+      "counts": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ]
+    },
+    "status": "PASS",
+    "defect": "Accumulating counts across separate texts without per-text state reset"
+  }
+]

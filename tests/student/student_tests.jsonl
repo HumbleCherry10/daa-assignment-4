@@ -1,0 +1,32 @@
+{"task":"lcs","a":"","b":""}
+{"task":"lcs","a":"algorithm","b":""}
+{"task":"lcs","a":"XAYBZCD","b":"1A2B3C4D5"}
+{"task":"lcs","a":"AAAA","b":"AA"}
+{"task":"lcs","a":"AB","b":"BA"}
+{"task":"merge","sizes":[]}
+{"task":"merge","sizes":[42]}
+{"task":"merge","sizes":[0,5,0,5]}
+{"task":"merge","sizes":[10,100,10]}
+{"task":"merge","sizes":[1000000000,1000000000,1000000000]}
+{"task":"tree","n":0,"weights":[],"edges":[]}
+{"task":"tree","n":1,"weights":[-15],"edges":[]}
+{"task":"tree","n":3,"weights":[-5,-10,-2],"edges":[[0,1],[1,2]]}
+{"task":"tree","n":6,"weights":[10,1,10,1,10,1],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5]]}
+{"task":"tree","n":5,"weights":[15,5,5,5,5],"edges":[[0,1],[0,2],[0,3],[0,4]]}
+{"task":"naive","text":"hello","pattern":""}
+{"task":"kmp","text":"abc","pattern":"abcdef"}
+{"task":"kmp","text":"AAAA","pattern":"AA"}
+{"task":"naive","text":"Test! test? Test!","pattern":"Test!"}
+{"task":"rk","text":"abdj","pattern":"ab"}
+{"task":"rk","text":"zabcdef","pattern":"bcd"}
+{"task":"suffix","text":""}
+{"task":"suffix","text":"x"}
+{"task":"suffix","text":"aaaa"}
+{"task":"suffix","text":"abcdef"}
+{"task":"suffix","text":"xyz_xyz_abc_abc"}
+{"task":"aho","patterns":[],"texts":["sample","text"]}
+{"task":"aho","patterns":["pattern"],"texts":[]}
+{"task":"aho","patterns":["alpha","beta"],"texts":["","alpha"]}
+{"task":"aho","patterns":["test","test"],"texts":["test test"]}
+{"task":"aho","patterns":["she","he","hers"],"texts":["ushers"]}
+{"task":"aho","patterns":["cat"],"texts":["cat","cat","dog"]}
